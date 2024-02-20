@@ -1,8 +1,10 @@
 const express = require("express");
 const cacheControl = require("express-cache-ctrl");
 const app = express();
-const apiRouter = require("./api/v1/routes/apiRouter");
+const apiRouter = require("../api/v1/routes/apiRouter");
 
+
+const PORT = process.env.PORT
 
 
 //boiler plate to access user input
@@ -11,7 +13,7 @@ app.use(express.json());
 
 
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("An error have occured!");
 });
@@ -40,20 +42,12 @@ app.use(setCache);
 
 
 
-// const setCache = function (req, res, next) {
-//     // keep cache for 5mins
-//     const period = 60 * 5;
 
-//     if (req.method === "GET") {
-//         res.set("Cache-control", `public, max-age=${period}`);
-//     } else {
-//         // for the other requests set strict no caching parameters
-//         res.set("Cache-control", `no-store`);
-//     }
 
-//     next();
-// };
-
+app.listen(PORT, () => {
+    console.log(`Server running...`);
+    // console.log(`worker pid=${process.pid}`);
+})
 
 
 

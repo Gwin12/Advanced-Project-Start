@@ -4,7 +4,7 @@ const cors = require("cors");
 
 // Controllers
 const usersController =  require('../controllers/usersController')
-const { findUsers } = usersController
+const { loadTest } = usersController
 
 
 
@@ -20,11 +20,11 @@ apiRouter.use(
 
 
 apiRouter.route("/users")
-    .get(findUsers)
+    .get()
     .post();
 
-apiRouter.route("/users")
-    .get()
+apiRouter.route("/loadTest")
+    .get(loadTest)
     .post();
 
 
