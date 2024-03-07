@@ -39,12 +39,7 @@ const setCache = function (req, res, next) {
 
 
 
-
-
-
-
 app.use(setCache);
-
 
 
 
