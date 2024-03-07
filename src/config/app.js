@@ -39,19 +39,6 @@ const setCache = function (req, res, next) {
 
 
 
-// const setCache = function (req, res, next) {
-//     // keep cache for 5mins
-//     const period = 60 * 5;
-
-//     if (req.method === "GET") {
-//         res.set("Cache-control", `public, max-age=${period}`);
-//     } else {
-//         // for the other requests set strict no caching parameters
-//         res.set("Cache-control", `no-store`);
-//     }
-
-//     next();
-// };
 
 
 
