@@ -1,5 +1,4 @@
 const express = require("express");
-const cacheControl = require("express-cache-ctrl");
 const app = express();
 const dotenv = require('dotenv')
 dotenv.config()
@@ -21,16 +20,16 @@ app.use((err, req, res, next) => {
 
 
 const setCache = function (req, res, next) {
+    const period = 60 * 5;      // keep cache for 5mins
+
     if (req.method === "GET") {
-
-        cacheControl({
-            maxAge: 3600, // Cache for 1 hour (in seconds)
-            public: true, // Cache is public (can be cached by intermediary caches)
-        })(req, res, next); // Apply cache control middleware
-
+        res.set("Cache-control", `public, max-age=${period}`);
     } else {
-        next(); // Pass non-GET requests to the next middleware or route handler
+        // for the other requests set strict no caching parameters
+        res.set("Cache-control", `no-store`);
     }
+
+    next();
 };
 
 
