@@ -2,7 +2,6 @@ const Helper = require('../helpers/helper')
 
 
 
-
 exports.loadTest = async function(req, res) {
     try {
         let total = 0;

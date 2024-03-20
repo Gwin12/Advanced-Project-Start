@@ -3,11 +3,25 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 
-console.log("Database Connected")
 
+async function connectTest() {
+    return new Promise((resolve, reject) => {
+        try {
+            setTimeout(() => {
+                console.log("Database Connected")
+                resolve({database: "database details", isConnected: true})
+                
+            }, 2000);
+        } catch (error) {
+            console.log(error)
+            reject({database: "failed", isConnected: false})
+        }
+    })
+        
+}
 
-const loadBalancer = require('../config/primary')
-loadBalancer()
+module.exports = connectTest
+
 
 
 
@@ -41,7 +55,7 @@ loadBalancer()
 //     module.exports = client
 
 // calling loadbalance then listening on port
-//     const loadBalancer = require('../config/primary')
+//     const loadBalancer = require('./primary')
 //     loadBalancer()
 
     
@@ -111,7 +125,7 @@ loadBalancer()
 //     module.exports = connection
 
 
-//     const loadBalancer = require('../config/primary')
+//     const loadBalancer = require('./primary')
 //     loadBalancer()
 
 //   } catch (error) {

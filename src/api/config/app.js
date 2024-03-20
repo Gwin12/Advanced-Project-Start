@@ -1,9 +1,6 @@
 const express = require("express");
 const cacheControl = require("express-cache-ctrl");
 const app = express();
-const apiRouter = require("../api/v1/routes/apiRouter");
-
-
 const PORT = process.env.PORT
 
 
@@ -17,9 +14,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("An error have occured!");
 });
-
-
-app.use("/api", apiRouter);
 
 
 
@@ -38,18 +32,33 @@ const setCache = function (req, res, next) {
 };
 
 
-
 app.use(setCache);
 
 
 
+// connecting to database first before listening for requests
+async function connectDb() {
+    try {
+        const db = require('./dbConfig')
+        const { isConnected, database } = await db()
 
-app.listen(PORT, () => {
-    console.log(`Server running...`);
-    // console.log(`worker pid=${process.pid}`);
-})
+        
+        module.exports = { app, database }
+
+        // listening only when the database has connected
+        if (isConnected) {
+            const apiRouter = require("../v1/routes/apiRouter");
+            app.use("/api", apiRouter);
 
 
 
+            app.listen(PORT, () => console.log(`Server running...`))
 
-module.exports = app;
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+connectDb()
