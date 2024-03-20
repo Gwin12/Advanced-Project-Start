@@ -1,6 +1,8 @@
 const express = require("express");
 const cacheControl = require("express-cache-ctrl");
 const app = express();
+const dotenv = require('dotenv')
+dotenv.config()
 const PORT = process.env.PORT
 
 

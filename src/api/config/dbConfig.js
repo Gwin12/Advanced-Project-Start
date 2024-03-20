@@ -1,8 +1,4 @@
 // DATABASE CONFIGURATIONS
-const dotenv = require('dotenv')
-dotenv.config()
-
-
 
 async function connectTest() {
     return new Promise((resolve, reject) => {
@@ -26,9 +22,6 @@ module.exports = connectTest
 
 
 
-// // MONGODB CONNECTION
-
-
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 
 // // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -45,27 +38,24 @@ module.exports = connectTest
 //     }
 // });
 
-
 // async function run() {
-//   try {
-//     await client.connect();      // Connect the client to the server	(optional starting in v4.7)
-//     await client.db("admin").command({ ping: 1 });      // Send a ping to confirm a successful connection
-//     console.log("Connected to MongoDB");
+//   return new Promise(async(resolve, reject) => {
+//     try {
+//       await client.connect();      // Connect the client to the server	(optional starting in v4.7)
+//       await client.db("admin").command({ ping: 1 });      // Send a ping to confirm a successful connection
+//       console.log("Connected to MongoDB");
+  
+//       resolve({database: client, isConnected: true})
+      
+//     } catch(error) {
+//       console.error(error)
+//       reject({database: "failed", isConnected: false})
 
-//     module.exports = client
-
-// calling loadbalance then listening on port
-//     const loadBalancer = require('./primary')
-//     loadBalancer()
-
-    
-//   } catch(error) {
-//     console.error(error)
-//     // Ensures that the client will close when you finish/error
-//     // await client.close();
-//   }
+//     }
+//   })
 // }
-// run().catch(console.dir);
+
+// module.exports = run
 
 
 
